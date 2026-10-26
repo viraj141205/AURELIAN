@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurelian Watches | Time Elevates You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E0D0B;
+    --surface: #171511;
+    --line: #2A2620;
+    --text: #F3EDE2;
+    --muted: #9C9384;
+    --brass: #C9A96A;
+    --brass-soft: #8E7442;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--ink); color: var(--text); font-family: var(--sans); }
+  body { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); line-height: 1.6; }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; color: inherit; background: none; border: 0; }
+  :focus-visible { outline: 1px solid var(--brass); outline-offset: 3px; }
+  a { color: inherit; text-decoration: none; }
+
+  header {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px clamp(20px, 5vw, 64px);
+    background: rgba(14,13,11,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { font-family: var(--serif); font-size: 1.6rem; letter-spacing: .18em; font-weight: 500; }
+  .brand small { display: block; font-family: var(--sans); font-size: .62rem; letter-spacing: .35em; color: var(--brass); margin-top: -2px; }
+  nav { display: flex; gap: 28px; font-size: .9rem; color: var(--muted); }
+  nav a:hover { color: var(--text); }
+  .cart-btn { font-size: .9rem; border: 1px solid var(--line); padding: 10px 18px; border-radius: 999px; }
+  .cart-btn span { color: var(--brass); margin-left: 6px; }
+
+  .hero {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center;
+    padding: clamp(48px, 9vw, 120px) clamp(20px, 5vw, 64px);
+    max-width: 1280px; margin: 0 auto;
+  }
+  .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3rem, 7vw, 5.6rem); line-height: 1.02; letter-spacing: -.01em; }
+  .hero p { color: var(--muted); max-width: 46ch; margin: 24px 0 36px; font-size: 1.02rem; }
+  .btn {
+    display: inline-block; padding: 16px 30px; background: var(--brass); color: var(--ink);
+    font-weight: 600; font-size: .92rem; letter-spacing: .04em; border-radius: 2px;
+  }
+  .btn:hover { background: #D8BB84; }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); margin-left: 12px; }
+  .btn.ghost:hover { border-color: var(--brass); }
+  .hero-art { position: relative; aspect-ratio: 1; }
+  .hero-art svg { width: 100%; height: 100%; }
+
+  .perks {
+    display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .perks div { padding: 26px clamp(20px, 3vw, 40px); font-size: .9rem; color: var(--muted); }
+  .perks strong { display: block; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+
+  section.shop { max-width: 1280px; margin: 0 auto; padding: clamp(56px, 8vw, 110px) clamp(20px, 5vw, 64px); }
+  .shop-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+  .shop-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); }
+  .shop-head p { color: var(--muted); font-size: .92rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+  .card { background: var(--surface); border: 1px solid var(--line); padding: 24px 22px 22px; display: flex; flex-direction: column; }
+  .card .face { margin-bottom: 20px; }
+  .card .face { aspect-ratio: 4 / 5; }
+  .card .face img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+  .card .spec + .spec { font-size: .72rem; letter-spacing: .12em; margin-top: 2px; }
+  .meta { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; margin: 6px 0 4px; }
+  .card .spec { font-size: .85rem; color: var(--muted); }
+  .card .row { margin-top: auto; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .price { font-size: 1.1rem; font-weight: 600; }
+  .add { font-size: .85rem; padding: 10px 16px; border: 1px solid var(--brass); color: var(--brass); border-radius: 2px; }
+  .add:hover { background: var(--brass); color: var(--ink); }
+
+  .story { background: var(--surface); border-block: 1px solid var(--line); }
+  .story-inner { max-width: 880px; margin: 0 auto; padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 64px); text-align: center; }
+  .story blockquote { font-family: var(--serif); font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.25; font-style: italic; color: var(--text); }
+  .story p { margin-top: 24px; color: var(--muted); }
+
+  footer { padding: 56px clamp(20px, 5vw, 64px) 40px; max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; font-size: .88rem; color: var(--muted); }
+  footer .brand { color: var(--text); }
+
+  /* Cart drawer */
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 30; }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface);
+    border-left: 1px solid var(--line); transform: translateX(100%); transition: transform .3s ease;
+    z-index: 40; display: flex; flex-direction: column;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px; border-bottom: 1px solid var(--line); }
+  .drawer-head h2 { font-family: var(--serif); font-weight: 500; font-size: 1.7rem; }
+  .close { font-size: 1.6rem; color: var(--muted); }
+  .items { flex: 1; overflow-y: auto; padding: 8px 24px; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  .line { display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .line .thumb { width: 64px; height: 64px; }
+  .line .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+  .line .name { font-family: var(--serif); font-size: 1.15rem; }
+  .qty { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: .85rem; }
+  .qty button { width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 2px; }
+  .remove { font-size: .75rem; color: var(--muted); margin-top: 6px; text-decoration: underline; }
+  .line .amt { font-weight: 600; }
+  .drawer-foot { padding: 22px 24px; border-top: 1px solid var(--line); }
+  .promo { display: flex; gap: 8px; margin-bottom: 14px; }
+  input, textarea {
+    width: 100%; background: var(--ink); color: var(--text); border: 1px solid var(--line);
+    padding: 12px 14px; font: inherit; border-radius: 2px;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--brass); }
+  .promo button { padding: 0 16px; border: 1px solid var(--brass); color: var(--brass); font-size: .85rem; white-space: nowrap; }
+  .totals { font-size: .92rem; color: var(--muted); display: grid; gap: 6px; margin-bottom: 16px; }
+  .totals .grand { color: var(--text); font-size: 1.1rem; font-weight: 600; }
+  .msg { font-size: .82rem; color: var(--brass); min-height: 1.2em; margin-bottom: 10px; }
+  .checkout { width: 100%; padding: 16px; background: var(--brass); color: var(--ink); font-weight: 600; border-radius: 2px; }
+  .checkout:disabled { opacity: .4; cursor: not-allowed; }
+  .checkout-form { display: none; gap: 10px; margin-bottom: 14px; }
+  .checkout-form.show { display: grid; }
+
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; background: var(--brass); color: var(--ink); padding: 12px 20px; font-size: .9rem; border-radius: 2px; transition: .3s; z-index: 50; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 820px) {
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-art { max-width: 380px; margin: 0 auto; width: 100%; }
+    .perks { grid-template-columns: 1fr; }
+    .btn.ghost { margin: 12px 0 0; display: inline-block; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#top" class="brand" id="top">AURELIAN<small>WATCHES</small></a>
+  <nav>
+    <a href="#shop">Collection</a>
+    <a href="#story">Our story</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="cart-btn" id="openCart" aria-label="Open cart">Bag<span id="cartCount">0</span></button>
+</header>
+
+<main>
+  <div class="hero">
+    <div>
+      <p class="meta">New collection · Shipping across India</p>
+      <h1 style="margin-top:18px">Time elevates you.</h1>
+      <p>Timeless design for a modern identity. Premium watches made for those who value every second.</p>
+      <a href="#shop" class="btn">Shop the collection</a>
+      <a href="#story" class="btn ghost">Our story</a>
+    </div>
+    <div class="hero-art" id="heroArt" aria-hidden="true"></div>
+  </div>
+
+  <div class="perks">
+    <div><strong>Free shipping across India</strong>Delivered to your door, fully insured.</div>
+    <div><strong>20% off your first order</strong>Use code AURELIAN20 at checkout.</div>
+    <div><strong>Premium craftsmanship</strong>Every piece finished by hand.</div>
+  </div>
+
+  <section class="shop" id="shop">
+    <div class="shop-head">
+      <h2>The collection</h2>
+      <p>Six pieces, each built around a single idea of time.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="story-inner">
+      <blockquote>Something new is unfolding.</blockquote>
+      <p>Aurelian was started with a simple sketch: a vision of a watch that could blend timeless elegance with modern confidence. Every piece is designed to be worn, admired, and passed on.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div>
+    <div class="brand">AURELIAN<small>WATCHES</small></div>
+    <p style="margin-top:12px">Time elevates you.</p>
+  </div>
+  <div>
+    <p>DM us on Instagram for orders and enquiries</p>
+    <p>@aurelianstudio.in</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag">
+  <div class="drawer-head">
+    <h2>Your bag</h2>
+    <button class="close" id="closeCart" aria-label="Close">×</button>
+  </div>
+  <div class="items" id="items"></div>
+  <div class="drawer-foot">
+    <div class="promo">
+      <input id="promoInput" placeholder="Promo code" aria-label="Promo code">
+      <button id="applyPromo">Apply</button>
+    </div>
+    <div class="msg" id="promoMsg"></div>
+    <div class="totals">
+      <div>Subtotal <span style="float:right" id="subtotal">₹0</span></div>
+      <div id="discountRow" style="display:none">Discount <span style="float:right" id="discount">−₹0</span></div>
+      <div>Shipping <span style="float:right">Free</span></div>
+      <div class="grand">Total <span style="float:right" id="total">₹0</span></div>
+    </div>
+    <form class="checkout-form" id="checkoutForm">
+      <input required name="name" placeholder="Full name" autocomplete="name">
+      <input required name="phone" type="tel" placeholder="Phone number" autocomplete="tel">
+      <textarea required name="address" rows="2" placeholder="Delivery address" autocomplete="street-address"></textarea>
+      <button class="checkout" type="submit">Place order</button>
+    </form>
+    <button class="checkout" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+  const PRODUCTS = [
+    { id: 1, sku: "AURELIAN-AN001", name: "Classic Noir", type: "Automatic · Gold case", price: 12500, strap: "Black croc-embossed leather", img: "images/an001.jpg" },
+    { id: 2, sku: "AURELIAN-AN002", name: "Ocean Blue", type: "Automatic · Steel case", price: 11900, strap: "Steel bracelet", img: "images/an002.jpg" },
+    { id: 3, sku: "AURELIAN-AN003", name: "Skeleton Black", type: "Skeleton automatic", price: 15900, strap: "Black rubber strap", img: "images/an003.jpg" },
+    { id: 4, sku: "AURELIAN-AN004", name: "Silver Classic", type: "Automatic · Silver", price: 10500, strap: "Silver mesh bracelet", img: "images/an004.jpg" },
+    { id: 5, sku: "AURELIAN-AN005", name: "Emerald Gold", type: "Automatic · Gold case", price: 13400, strap: "Emerald green leather", img: "images/an005.jpg" }
+  ];
+
+  const PROMOS = { AURELIAN20: 0.2 };
+  const cart = {};
+  let appliedPromo = null;
+  const fmt = n => "₹" + n.toLocaleString("en-IN");
+
+  // Builds a watch dial as inline SVG
+  function dial(p, uid) {
+    let marks = "";
+    for (let i = 0; i < 12; i++) {
+      const a = (i * 30) * Math.PI / 180;
+      const long = i % 3 === 0;
+      const r1 = long ? 74 : 80, r2 = 88;
+      marks += `<line x1="${100 + r1 * Math.sin(a)}" y1="${100 - r1 * Math.cos(a)}" x2="${100 + r2 * Math.sin(a)}" y2="${100 - r2 * Math.cos(a)}" stroke="${p.accent}" stroke-width="${long ? 3 : 1.5}" stroke-linecap="round"/>`;
+    }
+    return `<svg viewBox="0 0 200 200" role="img" aria-label="${p.name} dial">
+      <defs><radialGradient id="g${uid}" cx="50%" cy="40%" r="60%">
+        <stop offset="0" stop-color="${p.face}" stop-opacity="1"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".55"/>
+      </radialGradient></defs>
+      <circle cx="100" cy="100" r="98" fill="none" stroke="${p.accent}" stroke-width="2" opacity=".7"/>
+      <circle cx="100" cy="100" r="92" fill="url(#g${uid})"/>
+      ${marks}
+      <line x1="100" y1="100" x2="${100 + 46 * Math.sin(1.9)}" y2="${100 - 46 * Math.cos(1.9)}" stroke="${p.accent}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="100" y1="100" x2="${100 + 66 * Math.sin(3.6)}" y2="${100 - 66 * Math.cos(3.6)}" stroke="${p.accent}" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="100" y1="100" x2="${100 + 80 * Math.sin(4.9)}" y2="${100 - 80 * Math.cos(4.9)}" stroke="#E0553A" stroke-width="1" />
+      <circle cx="100" cy="100" r="4" fill="${p.accent}"/>
+      <text x="100" y="140" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" letter-spacing="3" fill="${p.accent}" opacity=".8">AURELIAN</text>
+    </svg>`;
+  }
+
+  function renderGrid() {
+    document.getElementById("grid").innerHTML = PRODUCTS.map(p => `
+      <article class="card">
+        <div class="face"><img src="${p.img}" alt="Aurelian ${p.name} watch"></div>
+        <span class="meta">${p.type}</span>
+        <h3>${p.name}</h3>
+        <div class="spec">${p.strap}</div>
+        <div class="spec">${p.sku}</div>
+        <div class="row">
+          <span class="price">${fmt(p.price)}</span>
+          <button class="add" data-id="${p.id}">Add to bag</button>
+        </div>
+      </article>`).join("");
+  }
+
+  function renderHero() {
+    document.getElementById("heroArt").innerHTML = '<img src="images/an001.jpg" alt="Aurelian Classic Noir watch" style="width:100%;height:100%;object-fit:cover;border-radius:2px">';
+  }
+
+  function totals() {
+    let subtotal = 0;
+    for (const id in cart) subtotal += PRODUCTS.find(p => p.id == id).price * cart[id];
+    const rate = appliedPromo ? PROMOS[appliedPromo] : 0;
+    const discount = Math.round(subtotal * rate);
+    return { subtotal, discount, total: subtotal - discount, count: Object.values(cart).reduce((a, b) => a + b, 0) };
+  }
+
+  function renderCart() {
+    const t = totals();
+    const ids = Object.keys(cart);
+    document.getElementById("items").innerHTML = ids.length ? ids.map(id => {
+      const p = PRODUCTS.find(x => x.id == id);
+      return `<div class="line">
+        <div class="thumb"><img src="${p.img}" alt=""></div>
+        <div>
+          <div class="name">${p.name}</div>
+          <div class="qty">
+            <button data-act="dec" data-id="${id}" aria-label="Decrease">−</button>
+            <span>${cart[id]}</span>
+            <button data-act="inc" data-id="${id}" aria-label="Increase">+</button>
+          </div>
+          <button class="remove" data-act="rm" data-id="${id}">Remove</button>
+        </div>
+        <div class="amt">${fmt(p.price * cart[id])}</div>
+      </div>`;
+    }).join("") : `<p class="empty">Your bag is empty.</p>`;
+
+    document.getElementById("cartCount").textContent = t.count;
+    document.getElementById("subtotal").textContent = fmt(t.subtotal);
+    document.getElementById("discountRow").style.display = t.discount ? "block" : "none";
+    document.getElementById("discount").textContent = "−" + fmt(t.discount);
+    document.getElementById("total").textContent = fmt(t.total);
+    document.getElementById("checkoutBtn").disabled = !ids.length;
+  }
+
+  function toast(msg) {
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast.t);
+    toast.t = setTimeout(() => el.classList.remove("show"), 2400);
+  }
+
+  function openCart(open) {
+    document.getElementById("drawer").classList.toggle("open", open);
+    document.getElementById("scrim").classList.toggle("open", open);
+    if (!open) document.getElementById("checkoutForm").classList.remove("show");
+  }
+
+  document.getElementById("grid").addEventListener("click", e => {
+    const btn = e.target.closest(".add");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    cart[id] = (cart[id] || 0) + 1;
+    renderCart();
+    toast(PRODUCTS.find(p => p.id == id).name + " added to your bag");
+  });
+
+  document.getElementById("items").addEventListener("click", e => {
+    const btn = e.target.closest("[data-act]");
+    if (!btn) return;
+    const id = btn.dataset.id, act = btn.dataset.act;
+    if (act === "inc") cart[id]++;
+    if (act === "dec") cart[id]--;
+    if (act === "rm" || cart[id] <= 0) delete cart[id];
+    renderCart();
+  });
+
+  document.getElementById("openCart").onclick = () => openCart(true);
+  document.getElementById("closeCart").onclick = () => openCart(false);
+  document.getElementById("scrim").onclick = () => openCart(false);
+
+  document.getElementById("applyPromo").onclick = () => {
+    const code = document.getElementById("promoInput").value.trim().toUpperCase();
+    const msg = document.getElementById("promoMsg");
+    if (PROMOS[code]) {
+      appliedPromo = code;
+      msg.textContent = "Code " + code + " applied: 20% off.";
+    } else {
+      appliedPromo = null;
+      msg.textContent = code ? "That code isn't valid. Try again." : "";
+    }
+    renderCart();
+  };
+
+  document.getElementById("checkoutBtn").onclick = () => {
+    document.getElementById("checkoutForm").classList.add("show");
+    document.querySelector("#checkoutForm input[name=name]").focus();
+  };
+
+  document.getElementById("checkoutForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const orderNo = "AUR-" + Math.floor(100000 + Math.random() * 900000);
+    for (const k in cart) delete cart[k];
+    appliedPromo = null;
+    document.getElementById("promoInput").value = "";
+    document.getElementById("promoMsg").textContent = "";
+    e.target.reset();
+    renderCart();
+    openCart(false);
+    toast("Order " + orderNo + " placed. We'll DM you to confirm.");
+  });
+
+  renderGrid();
+  renderHero();
+  renderCart();</script>
+</body>
+</html>
